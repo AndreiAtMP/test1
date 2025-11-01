@@ -1,6 +1,6 @@
 extends Node
 
-@onready var third_person_camera = $"../Camera3D"
+@onready var third_person_camera = $"../ThirdPersonCamera"
 @onready var first_person_camera = $"../Cabin/Camera3D"
 
 func _ready():

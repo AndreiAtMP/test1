@@ -18,18 +18,14 @@ func _physics_process(delta):
 	var direction = Vector3.ZERO
 	var rotation = Vector3.ZERO
 
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("move_up"):
 		rotation.x += pitch_speed * delta
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("move_down"):
 		rotation.x -= pitch_speed * delta
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("move_left"):
 		rotation.z += roll_speed * delta
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("move_right"):
 		rotation.z -= roll_speed * delta
-	if Input.is_action_pressed("ui_page_up"):
-		rotation.y += yaw_speed * delta
-	if Input.is_action_pressed("ui_page_down"):
-		rotation.y -= yaw_speed * delta
 
 	if Input.is_action_pressed("increase_speed"):
 		speed += speed_change_rate * delta
