@@ -4,7 +4,9 @@ extends Control
 @onready var speed_label = $SpeedLabel
 
 func update_score(score):
-	score_label.text = "Score: " + str(score)
+	if score_label:
+		score_label.text = "Score: " + str(score)
 
 func update_speed(speed):
-	speed_label.text = "Speed: " + str(speed)
+	if speed_label:
+		speed_label.text = "Speed: " + str(speed)

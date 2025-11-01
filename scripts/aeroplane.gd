@@ -15,21 +15,16 @@ func _ready():
 	ui.update_speed(speed)
 
 func _physics_process(delta):
-	var direction = Vector3.ZERO
-	var rotation = Vector3.ZERO
+	var rot = Vector3.ZERO
 
-	if Input.is_action_pressed("ui_up"):
-		rotation.x += pitch_speed * delta
-	if Input.is_action_pressed("ui_down"):
-		rotation.x -= pitch_speed * delta
-	if Input.is_action_pressed("ui_left"):
-		rotation.z += roll_speed * delta
-	if Input.is_action_pressed("ui_right"):
-		rotation.z -= roll_speed * delta
-	if Input.is_action_pressed("ui_page_up"):
-		rotation.y += yaw_speed * delta
-	if Input.is_action_pressed("ui_page_down"):
-		rotation.y -= yaw_speed * delta
+	if Input.is_action_pressed("move_up"):
+		rot.x += pitch_speed * delta
+	if Input.is_action_pressed("move_down"):
+		rot.x -= pitch_speed * delta
+	if Input.is_action_pressed("move_left"):
+		rot.z += roll_speed * delta
+	if Input.is_action_pressed("move_right"):
+		rot.z -= roll_speed * delta
 
 	if Input.is_action_pressed("increase_speed"):
 		speed += speed_change_rate * delta
@@ -37,9 +32,9 @@ func _physics_process(delta):
 		speed -= speed_change_rate * delta
 		speed = max(0, speed)
 
-	rotate_object_local(Vector3(1, 0, 0), rotation.x)
-	rotate_object_local(Vector3(0, 0, 1), rotation.z)
-	rotate_object_local(Vector3(0, 1, 0), rotation.y)
+	rotate_object_local(Vector3(1, 0, 0), rot.x)
+	rotate_object_local(Vector3(0, 0, 1), rot.z)
+	rotate_object_local(Vector3(0, 1, 0), rot.y)
 
 	velocity = -transform.basis.z * speed
 	move_and_slide()
