@@ -1,0 +1,51 @@
+extends CharacterBody3D
+
+@export var speed = 10.0
+@export var pitch_speed = 1.0
+@export var roll_speed = 1.5
+@export var yaw_speed = 0.5
+@export var speed_change_rate = 2.0
+
+var score = 0
+@onready var ui = get_node("/root/Main/CanvasLayer/UI")
+
+func _ready():
+	add_to_group("player")
+	ui.update_score(score)
+	ui.update_speed(speed)
+
+func _physics_process(delta):
+	var direction = Vector3.ZERO
+	var rotation = Vector3.ZERO
+
+	if Input.is_action_pressed("ui_up"):
+		rotation.x += pitch_speed * delta
+	if Input.is_action_pressed("ui_down"):
+		rotation.x -= pitch_speed * delta
+	if Input.is_action_pressed("ui_left"):
+		rotation.z += roll_speed * delta
+	if Input.is_action_pressed("ui_right"):
+		rotation.z -= roll_speed * delta
+	if Input.is_action_pressed("ui_page_up"):
+		rotation.y += yaw_speed * delta
+	if Input.is_action_pressed("ui_page_down"):
+		rotation.y -= yaw_speed * delta
+
+	if Input.is_action_pressed("increase_speed"):
+		speed += speed_change_rate * delta
+	if Input.is_action_pressed("decrease_speed"):
+		speed -= speed_change_rate * delta
+		speed = max(0, speed)
+
+	rotate_object_local(Vector3(1, 0, 0), rotation.x)
+	rotate_object_local(Vector3(0, 0, 1), rotation.z)
+	rotate_object_local(Vector3(0, 1, 0), rotation.y)
+
+	velocity = -transform.basis.z * speed
+	move_and_slide()
+	ui.update_speed(velocity.length())
+
+
+func _on_ball_collected():
+	score += 1
+	ui.update_score(score)

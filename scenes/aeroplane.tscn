@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dthvxlf6v2g2x"]
+
+[ext_resource type="Script" path="res://scripts/aeroplane.gd" id="1_xacqn"]
+[ext_resource type="Script" path="res://scripts/camera_controller.gd" id="2_abcde"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_v2y2y"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_cy276"]
+
+[node name="Aeroplane" type="CharacterBody3D"]
+script = ExtResource("1_xacqn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_v2y2y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cy276")
+
+[node name="ThirdPersonCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
+
+[node name="Cabin" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Cabin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
+
+[node name="FrontWindow" type="MeshInstance3D" parent="Cabin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
+mesh = SubResource("BoxMesh_v2y2y")
+
+[node name="Dashboard" type="MeshInstance3D" parent="Cabin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1.5)
+mesh = SubResource("BoxMesh_v2y2y")
+
+[node name="LeftWindow" type="MeshInstance3D" parent="Cabin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -1)
+mesh = SubResource("BoxMesh_v2y2y")
+
+[node name="RightWindow" type="MeshInstance3D" parent="Cabin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -1)
+mesh = SubResource("BoxMesh_v2y2y")
+
+[node name="CameraController" type="Node" parent="."]
+script = ExtResource("2_abcde")

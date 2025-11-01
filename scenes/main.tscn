@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7vsv6bgeah4n"]
+
+[ext_resource type="PackedScene" uid="uid://dthvxlf6v2g2x" path="res://scenes/aeroplane.tscn" id="1_4w6yq"]
+[ext_resource type="PackedScene" uid="uid://b3w2w2q8y7y6v" path="res://scenes/ball.tscn" id="2_abcde"]
+[ext_resource type="PackedScene" uid="uid://c6g8h6y5x4w3e" path="res://scenes/ui.tscn" id="3_xyz"]
+
+[sub_resource type="Sky" id="Sky_yda8y"]
+[sub_resource type="Environment" id="Environment_37606"]
+background_mode = 2
+sky = SubResource("Sky_yda8y")
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_37606")
+
+[node name="Aeroplane" parent="." instance=ExtResource("1_4w6yq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="Ball" parent="." instance=ExtResource("2_abcde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+[connection signal="ball_collected" from="Ball" to="Aeroplane" method="_on_ball_collected"]
+
+[node name="Ball2" parent="." instance=ExtResource("2_abcde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 15)
+[connection signal="ball_collected" from="Ball2" to="Aeroplane" method="_on_ball_collected"]
+
+[node name="Ball3" parent="." instance=ExtResource("2_abcde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -2, 20)
+[connection signal="ball_collected" from="Ball3" to="Aeroplane" method="_on_ball_collected"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("3_xyz")]
