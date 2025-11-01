@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7vsv6bgeah4n"]
+[gd_scene load_steps=6 format=3 uid="uid://c7vsv6bgeah4n"]
 
 [ext_resource type="PackedScene" uid="uid://dthvxlf6v2g2x" path="res://scenes/aeroplane.tscn" id="1_4w6yq"]
 [ext_resource type="PackedScene" uid="uid://b3w2w2q8y7y6v" path="res://scenes/ball.tscn" id="2_abcde"]
@@ -9,48 +9,25 @@
 background_mode = 2
 sky = SubResource("Sky_yda8y")
 
-[sub_resource type="BoxMesh" id="BoxMesh_ground"]
-size = Vector3(1, 0.1, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
-size = Vector3(1, 0.1, 1)
-
 [node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_37606")
 
-[node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -10, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("BoxMesh_ground")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("BoxShape3D_ground")
-
 [node name="Aeroplane" parent="." instance=ExtResource("1_4w6yq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
 [node name="Ball" parent="." instance=ExtResource("2_abcde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 [connection signal="ball_collected" from="Ball" to="Aeroplane" method="_on_ball_collected"]
 
 [node name="Ball2" parent="." instance=ExtResource("2_abcde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 8, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 15)
 [connection signal="ball_collected" from="Ball2" to="Aeroplane" method="_on_ball_collected"]
 
 [node name="Ball3" parent="." instance=ExtResource("2_abcde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 12, 30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -2, 20)
 [connection signal="ball_collected" from="Ball3" to="Aeroplane" method="_on_ball_collected"]
-
-[node name="Ball4" parent="." instance=ExtResource("2_abcde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6, 40)
-[connection signal="ball_collected" from="Ball4" to="Aeroplane" method="_on_ball_collected"]
-
-[node name="Ball5" parent="." instance=ExtResource("2_abcde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 15, 50)
-[connection signal="ball_collected" from="Ball5" to="Aeroplane" method="_on_ball_collected"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -1,37 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://dthvxlf6v2g2x"]
+[gd_scene load_steps=5 format=3 uid="uid://dthvxlf6v2g2x"]
 
 [ext_resource type="Script" path="res://scripts/aeroplane.gd" id="1_xacqn"]
 [ext_resource type="Script" path="res://scripts/camera_controller.gd" id="2_abcde"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_v2y2y"]
-size = Vector3(3, 0.5, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_cy276"]
-size = Vector3(3, 0.5, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wing"]
-size = Vector3(0.2, 0.1, 4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_tail"]
-size = Vector3(0.5, 2, 0.2)
 
 [node name="Aeroplane" type="CharacterBody3D"]
 script = ExtResource("1_xacqn")
 
-[node name="Fuselage" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_v2y2y")
-
-[node name="LeftWing" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
-mesh = SubResource("BoxMesh_wing")
-
-[node name="RightWing" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-mesh = SubResource("BoxMesh_wing")
-
-[node name="Tail" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-mesh = SubResource("BoxMesh_tail")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_cy276")
